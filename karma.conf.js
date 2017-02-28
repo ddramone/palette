@@ -18,8 +18,8 @@ module.exports = function (config) {
             module: {
                 loaders: [
                     { test: /\.js/, exclude: [/node_modules/], loader: 'babel-loader' },
-                    { test: /\.html/, loader: 'raw-loader' }
-                    //TODO empty loaders for styles
+                    { test: /\.html/, loader: 'raw-loader' },
+                    { test: /\.(css|scss)$/, loader: 'empty-loader' }
                 ]
             }
         },
@@ -29,7 +29,7 @@ module.exports = function (config) {
         },
 
 
-        reporters: ['dots'],
+        reporters: ['mocha'],
 
 
         port: 9876,
