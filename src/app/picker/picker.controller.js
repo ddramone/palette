@@ -1,6 +1,9 @@
 export class PickerController {
 
-    constructor() {
+    constructor(colorService) {
+
+
+
         var vm = this;
         vm.title = "Some Title";
     }

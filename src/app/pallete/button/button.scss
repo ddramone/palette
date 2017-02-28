@@ -1,0 +1,33 @@
+.button {
+
+  border: 1px solid transparent;
+  border-radius: 4px;
+  background: transparent;
+  color: white;
+  cursor: pointer;
+  display: inline-block;
+  font-size: inherit;
+  text-align: center;
+  text-transform: uppercase;
+  line-height: 30px;
+  width: 100px;
+  height: 32px;
+  outline: 0;
+
+  &--outline {
+    border-color: white;
+
+    &:hover {
+      background: white;
+      color: #121212;
+    }
+
+  }
+
+  &--success {
+    cursor: default;
+    background: #7ed321;
+    border-color: #7ed321;
+  }
+
+}
