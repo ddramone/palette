@@ -24,7 +24,7 @@ describe('Picker', () => {
         it('should return correct pallete for red', () => {
             expect(
                 colorsService.getPallete()
-            ).toEqual(["#ff1919", "#ff3232", "#ff4b4b", "#ff6464", "#ff7d7d", "#ff9696"]);
+            ).toEqual(["#ff0000", "#ff1919", "#ff3232", "#ff4b4b", "#ff6464", "#ff7d7d"]);
         });
     });
 

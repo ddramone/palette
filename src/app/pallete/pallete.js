@@ -10,7 +10,7 @@ angular.module('pallete')
 
     .component('plPallete', {
         template: require('./pallete.html'),
-        controller: ['colorsService', PalleteController],
+        controller: ['$scope', '$rootScope', 'colorsService', PalleteController],
         controllerAs: 'vm'
     })
     .directive('plButton', ButtonDirective);

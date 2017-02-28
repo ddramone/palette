@@ -1,4 +1,8 @@
 
+* {
+  box-sizing: border-box;
+}
+
 html, body {
   height: 100%;
 }
@@ -14,8 +18,7 @@ body {
 }
 
 .sidebar {
-  flex-basis: 480px;
-  background: green;
+  flex-basis: 380px;
 }
 
 .main {
