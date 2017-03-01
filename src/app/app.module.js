@@ -1,4 +1,6 @@
 import angular from 'angular';
 
-angular.module('pallete', ['angular-clipboard'], () => {
+import clipboardModule from 'angular-clipboard';
+
+angular.module('pallete', [clipboardModule.name], () => {
 });

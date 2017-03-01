@@ -4,6 +4,8 @@ export class PickerController {
 
         var vm = this;
 
+        vm.title = "Some Title";
+
         var picker = new CP(document.getElementById('ColorPicker'), false);
         var pickerPosition = document.getElementById('ColorPickerPosition');
 

@@ -11,12 +11,12 @@ module.exports = function (config) {
 
         exclude: [],
 
-        preprocessors: { 'spec.bundle.js': ['webpack', 'sourcemap'] },
+        preprocessors: { 'spec.bundle.js': ['webpack'] },
 
         webpack: {
             devtool: 'inline-source-map',
             module: {
-                loaders: [
+                rules: [
                     { test: /\.js/, exclude: [/node_modules/], loader: 'babel-loader' },
                     { test: /\.html/, loader: 'raw-loader' },
                     { test: /\.(css|scss)$/, loader: 'empty-loader' }
