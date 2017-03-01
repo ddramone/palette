@@ -2,39 +2,78 @@ import angular from 'angular';
 import tinycolor from 'tinycolor2';
 
 angular.module('pallete')
-    .factory('colorsService', ['$rootScope', function ($rootScope) {
+    .service('colorsService', [function () {
 
         let self = this;
-        self.hex = 'black';
 
-        return {
-            getColor: () => {
-                return self.hex;
-            },
-            setColor: (hex) => {
+        self.palette = [];
+        self.combination = 'analog';
+        self.hex = tinycolor.random().toHexString();
 
-                if (hex !== self.hex) {
-                    self.hex = hex;
-                    $rootScope.$broadcast('onColorChange');
-                }
 
-            },
-            getPallete: () => {
+        self.getPossibleCombinations = () => {
+            return ['analog', 'mono', 'split', 'triad', 'tetrad'];
+        };
 
-                // tinycolor ref for our hex
-                const color = tinycolor(self.hex);
+        self.setCombination = (combination) => {
 
-                // return object with colors
-                const ret = [color.toHexString()];
+            self.combination = combination;
+            self.setPallete();
 
-                for (let i = 0; i <= 4; i++) {
+        };
 
-                    ret.push(color.brighten().toHexString());
+        self.getColor = () => {
+            return self.hex;
+        };
 
-                }
+        self.setColor = (hex) => {
 
-                return ret;
+            if (hex !== self.hex) {
+                self.hex = hex;
+                self.setPallete();
+            }
+
+        };
+
+        self.setPallete = () => {
+
+            // tinycolor ref for our hex
+            const color = tinycolor(self.hex);
+            let colors;
+
+
+            switch (self.combination) {
+                case 'analog':
+                case 'analogous':
+                    colors = color.analogous();
+                    break;
+                case 'mono':
+                case 'monochromatic':
+                    colors = color.monochromatic();
+                    break;
+                case 'split':
+                case 'splitcomplement':
+                    colors = color.splitcomplement();
+                    break;
+                case 'triad':
+                    colors = color.triad();
+                    break;
+                case 'tetrad':
+                    colors = color.tetrad();
+                    break;
 
             }
+
+
+
+            self.palette.splice(0, self.palette.length);
+            colors.map((c) => {
+                self.palette.push(c.toHexString());
+            });
+
+
+
         };
+
+        self.setPallete();
     }]);

@@ -5,6 +5,11 @@
     </div>
 </div>
 
+<div class="combination__actions">
+    <button ng-repeat="co in vm.combinations" ng-class="vm.ifActive(co)?'button--active':'button--outline'" ng-click="vm.setCombination(co)"
+        class="button">{{co}}</button>
+</div>
+
 <div class="palette">
     <div class="palette__picker" id="ColorPickerPosition"></div>
     <input type="text" class="palette__input" id="ColorPicker">

@@ -1,5 +1,5 @@
 import './shared/color.service';
 
-import './pallete/pallete';
+import './palette/palette';
 import './picker/picker';
 

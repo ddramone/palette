@@ -34,7 +34,27 @@
   }
 
   &__input {
-    display: none;
+    // display: none;
   }
 
+  
+
+}
+
+.combination__actions {
+  display: block;
+  margin: auto;
+  text-align: center;
+
+  .button {
+    
+    
+    &--outline {
+      background: #b7b7b7;
+      color: white;
+    }
+    &--active {
+      background: green;
+    }
+  }
 }

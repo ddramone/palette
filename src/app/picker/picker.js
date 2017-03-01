@@ -1,5 +1,5 @@
 import './../../vendor/colorpicker/colorpicker.scss';
-require('./../../vendor/colorpicker/colorpicker.min.js');
+import './../../vendor/colorpicker/colorpicker.min.js';
 
 import './picker.scss';
 
@@ -9,6 +9,6 @@ import { PickerController } from './picker.controller';
 angular.module('pallete')
     .component('plPicker', {
         template: require('./picker.html'),
-        controller: ['colorsService', PickerController],
+        controller: ['$rootScope', 'colorsService', PickerController],
         controllerAs: 'vm'
     });
