@@ -8,15 +8,12 @@ var config = {
 
     entry: {
         main: path.resolve(__dirname, 'src', 'main.js')
-        // vendor: path.resolve(__dirname, 'src', 'vendor.js')
     },
-
 
     output: {
         path: path.resolve(__dirname, 'dist'),
         filename: '[name].js',
     },
-
 
     devtool: 'source-map',
 
@@ -53,10 +50,6 @@ var config = {
     },
 
     plugins: [
-
-        // new webpack.optimize.CommonsChunkPlugin({
-        // name: ['app', 'vendor']
-        // }),
 
         new HtmlWebpackPlugin({
             inject: 'head',
