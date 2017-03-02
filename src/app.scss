@@ -25,13 +25,18 @@ body {
   flex: 1;
 }
 
+.wrapper {
+  width: 100%;
+  height: 100%;
+}
+
 @media (max-width: 768px) {
   .container {
     flex-direction: column;
   }
 
   .sidebar {
-    flex: 1;
+    
   }
 
   .main {

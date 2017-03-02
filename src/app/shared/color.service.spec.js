@@ -35,7 +35,7 @@ describe('Color Service', () => {
             colorsService.setColor('red');
             colorsService.setPallete();
 
-            expect(colorsService.palette).toEqual(correctPallete);
+            expect(colorsService.palette.map(e => e.c)).toEqual(correctPallete);
         });
 
         it('should return correct pallete for yellow using mono combination', () => {
@@ -44,7 +44,7 @@ describe('Color Service', () => {
             colorsService.setColor('yellow');
             colorsService.setPallete();
 
-            expect(colorsService.palette).toEqual(correctPallete);
+            expect(colorsService.palette.map(e => e.c)).toEqual(correctPallete);
         });
 
         it('should return correct pallete for green using split combination', () => {
@@ -52,7 +52,7 @@ describe('Color Service', () => {
             colorsService.setColor('green');
             colorsService.setPallete();
 
-            expect(colorsService.palette).toEqual(correctPallete);
+            expect(colorsService.palette.map(e => e.c)).toEqual(correctPallete);
         });
 
     });

@@ -1,3 +1,5 @@
+import tinycolor from 'tinycolor2';
+
 export class PickerController {
 
     constructor($rootScope, colorsService) {
@@ -12,13 +14,16 @@ export class PickerController {
         vm.active = vm.combinations[0];
 
 
+
         const picker = new CP(document.getElementById('ColorPicker'), false);
         const pickerPosition = document.getElementById('ColorPickerPosition');
 
         // picker onchange event
         picker.on("change", function (color) {
-            this.target.value = '#' + color;
-            vm.colorsService.setColor('#' + color);
+            const hex = '#' + color;
+            this.target.value = hex;
+            vm.colorsService.setColor(hex);
+            vm.color = tinycolor(hex).setAlpha(0.3).toRgbString();
             $rootScope.$broadcast('colorsChange');
         });
 

@@ -10,7 +10,6 @@ angular.module('pallete')
         self.combination = 'analog';
         self.hex = tinycolor.random().toHexString();
 
-
         self.getPossibleCombinations = () => {
             return ['analog', 'mono', 'split', 'triad', 'tetrad'];
         };
@@ -24,6 +23,10 @@ angular.module('pallete')
 
         self.getColor = () => {
             return self.hex;
+        };
+
+        self.getReadable = (color) => {
+            return tinycolor.mostReadable(color, ['#fff', '#000']).toHexString();
         };
 
         self.setColor = (hex) => {
@@ -67,8 +70,13 @@ angular.module('pallete')
 
 
             self.palette.splice(0, self.palette.length);
+
             colors.map((c) => {
-                self.palette.push(c.toHexString());
+                self.palette.push({
+                    c: c.toHexString(),
+                    t: tinycolor.mostReadable(c, ['#fff', '#000']).toHexString()
+                });
+
             });
 
 
