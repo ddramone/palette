@@ -4,7 +4,6 @@ module.exports = function (config) {
 
         basePath: '',
 
-
         frameworks: ['jasmine'],
 
         files: [{ pattern: 'spec.bundle.js', watched: false }],

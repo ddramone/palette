@@ -15,9 +15,6 @@ describe('Color Service', () => {
         colorsService.setColor('black');
     }));
 
-
-
-
     it('should set correct color', () => {
         colorsService.setColor('green');
         expect(colorsService.getColor()).toEqual('green');

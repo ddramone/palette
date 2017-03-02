@@ -6,13 +6,14 @@ export class PickerController {
 
         var vm = this;
 
-        vm.$rootScope = $rootScope;
-
         vm.colorsService = colorsService;
 
+        // possible combinations to be shown as buttons
         vm.combinations = colorsService.getPossibleCombinations();
-        vm.active = vm.combinations[0];
 
+        // currently active combination as string 
+        // default: first value from all possibles
+        vm.active = vm.combinations[0];
 
 
         const picker = new CP(document.getElementById('ColorPicker'), false);
@@ -23,7 +24,6 @@ export class PickerController {
             const hex = '#' + color;
             this.target.value = hex;
             vm.colorsService.setColor(hex);
-            vm.color = tinycolor(hex).setAlpha(0.3).toRgbString();
             $rootScope.$broadcast('colorsChange');
         });
 
