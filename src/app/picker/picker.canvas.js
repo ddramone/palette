@@ -32,7 +32,7 @@ export function ColorPicker(config) {
     let canvas = document.getElementById(options.target);
     let ctx = canvas.getContext("2d");
 
-    var img = new Image(70, 88);
+    var img = new Image(90, 10);
 
     let mousePressed = false;
 
@@ -45,8 +45,12 @@ export function ColorPicker(config) {
 
         canvas.onclick = function (e) {
 
-            // facing = getDestAngle(e);
-            animate();
+
+            facing = getDestAngle(e);
+            triggerChangeEvent(facing);
+
+            console.log(facing, startingAngle);
+
         };
 
         canvas.onmousedown = function (e) {
@@ -61,49 +65,53 @@ export function ColorPicker(config) {
 
             if (!mousePressed) return;
             facing = getDestAngle(e);
+            triggerChangeEvent(facing);
 
         };
 
-
-        function animate() {
-
-            let startTime = new Date();
-            let iteration = 0;
+        function triggerChangeEvent(angle) {
 
 
-            if (interval) {
-                clearInterval(interval);
-                startingAngle = currentAngle;
-            }
+            let hue = angle;
+            let saturation = 1.0;
+            let value = 1.0;
+
+            let [red, green, blue] = hsv2rgb(hue, saturation, value);
+            let alpha = 255;
+
+            options.onchange(red, green, blue, alpha);
+
+        }
+
+
+
+
+
+
+        interval = setInterval(function () {
+
 
             let rotateBy = (facing - startingAngle) % 360;
 
-            if (Math.abs(rotateBy) > 180) {
+            if (rotateBy >= 180) {
                 rotateBy = rotateBy - 360;
+            } else if (rotateBy <= -180) {
+                rotateBy = rotateBy + 360;
             }
 
-            let iterations = Math.abs(Math.round(rotateBy / 10));
 
-            interval = setInterval(function () {
-                const now = new Date();
 
-                currentAngle = Math.easeInOutQuad(iteration, startingAngle, rotateBy, iterations);
+            startingAngle = (startingAngle + Math.round(rotateBy / 5, 3)) % 360;
+            rotateBy -= Math.round(rotateBy / 5, 3);
 
-                let [red, green, blue] = hsv2rgb(startingAngle, 1.0, 1.0);
-                let alpha = 255;
+            currentAngle = Math.easeInOutQuad(1, startingAngle, rotateBy, 10);
 
-                if (iteration == iterations) {
-                    clearInterval(interval);
-                    startingAngle = currentAngle;
-                } else {
-                    iteration++;
-                }
+            let [red, green, blue] = hsv2rgb(startingAngle, 1.0, 1.0);
+            let alpha = 255;
 
-                drawBoth(currentAngle);
+            drawBoth(currentAngle);
 
-            }, 33);
-
-        };
+        }, 33);
 
 
 
@@ -122,7 +130,7 @@ export function ColorPicker(config) {
 
         let [r, phi] = xy2polar(x, y);
 
-        return (rad2deg(phi) + 270) % 360;
+        return rad2deg(phi);
 
     }
 
@@ -193,22 +201,11 @@ export function ColorPicker(config) {
 
         }
 
-        const offsetX = radius;
-        const offsetY = canvas.height / 2;
+        const offsetX = canvas.height / 2;
+        const offsetY = radius;
 
-        rotateAndPaintImage(img, angle, canvas.width / 2, offsetY, 35, 108);
+        rotateAndPaintImage(img, angle, radius, offsetY, 90, 4.5);
 
-        if (options.onchange) {
-
-            let hue = angle;
-            let saturation = 1.0;
-            let value = 1.0;
-
-            let [red, green, blue] = hsv2rgb(hue, saturation, value);
-            let alpha = 255;
-
-            options.onchange(red, green, blue, alpha)
-        }
     }
 
     /**
