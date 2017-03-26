@@ -1,4 +1,5 @@
 import tinycolor from 'tinycolor2';
+import { ColorPicker } from './picker.canvas';
 
 export class PickerController {
 
@@ -16,27 +17,39 @@ export class PickerController {
         vm.active = vm.combinations[0];
 
 
-        const picker = new CP(document.getElementById('ColorPicker'), false);
-        const pickerPosition = document.getElementById('ColorPickerPosition');
+        ColorPicker({
+            target: "palletePicker",
+            onchange: function (r, g, b, a) {
 
-        // picker onchange event
-        picker.on("change", function (color) {
-            const hex = '#' + color;
-            this.target.value = hex;
-            vm.colorsService.setColor(hex);
-            $rootScope.$broadcast('colorsChange');
+                const col = new tinycolor({
+                    r: r, g: g, b: b, a: a
+                });
+
+                const hex = '#' + col.toHex();
+
+                vm.colorsService.setColor(hex);
+                $rootScope.$broadcast('colorsChange');
+            }
         });
 
-        // add a `static` class to the color picker panel
-        picker.picker.classList.add('static');
-        picker.set(vm.colorsService.hex);
+        // // picker onchange event
+        // picker.on("change", function (color) {
+        //     const hex = '#' + color;
+        //     this.target.value = hex;
+        //     vm.colorsService.setColor(hex);
+        //     $rootScope.$broadcast('colorsChange');
+        // });
 
-        // render picker to given element
-        picker.enter(pickerPosition);
+        // // add a `static` class to the color picker panel
+        // picker.picker.classList.add('static');
+        // picker.set(vm.colorsService.hex);
 
-        window.onresize = function () {
-            picker.enter(pickerPosition);
-        };
+        // // render picker to given element
+        // picker.enter(pickerPosition);
+
+        // window.onresize = function () {
+        //     picker.enter(pickerPosition);
+        // };
 
     }
 

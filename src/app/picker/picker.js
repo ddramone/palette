@@ -1,5 +1,4 @@
-import './../../vendor/colorpicker/colorpicker.scss';
-import './../../vendor/colorpicker/colorpicker.min.js';
+import './picker.canvas';
 
 import './picker.scss';
 
